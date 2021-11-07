@@ -3,6 +3,7 @@
   --title-color: #ffffff;
   --text-color: #757575;
   --accent-color: #2196f3;
+  --button-active: #188ce8;
   --logo-color-header: #000000;
   --logo-color-footer: #ffffff;
   --text-button-first-color: #ffffff;
@@ -60,6 +61,10 @@ address {
   font-style: inherit;
 }
 
+textarea {
+  resize: none;
+}
+
 .container {
   width: 1200px;
   padding: 0 15px;
@@ -101,16 +106,12 @@ address {
 }
 
 .btn:hover,
-.btn:focus {
+.btn:focus,
+.btn:active {
   color: var(--text-button-first-color);
   background-color: var(--accent-color);
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
-}
-
-.btn:active {
-  color: var(--text-button-first-color);
-  background-color: var(--accent-color);
 }
 
 .accent-color {
@@ -216,7 +217,6 @@ address {
   max-width: 1600px;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
   padding: 200px 0;
   background-image: linear-gradient(
       rgba(47, 48, 58, 0.4),
@@ -227,6 +227,12 @@ address {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero-title {
@@ -243,8 +249,8 @@ address {
 
 .hero-button {
   color: var(--title-color);
-  background-color: var(--accent-color);
-  font-weight: bold;
+  background-color: var(--main-button-color-background);
+  font-weight: 700;
   font-size: 16px;
   line-height: 1.88;
   letter-spacing: 0.06em;
@@ -252,8 +258,252 @@ address {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   padding: 10px 32px;
-  align-items: center;
   text-align: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  transition: background-color var(--animation-timing) var(--timing-function),
+    box-shadow var(--animation-timing) var(--timing-function);
+}
+
+.hero-button:active {
+  background-color: var(--button-active);
+  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
+    0px 2px 2px rgba(0, 0, 0, 0.12);
+}
+
+/*modal*/
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: opacity var(--animation-timing) var(--timing-function);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.modal {
+  padding: 40px;
+  position: absolute;
+  min-width: 528px;
+  min-height: 581px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  background-color: #ffffff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: transform var(--animation-timing) var(--timing-function);
+}
+
+.modal-title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.15;
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
+.modal-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.modal-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  transition: fill var(--animation-timing) var(--timing-function);
+}
+
+.modal-button:hover .modal-icon,
+.modal-button:focus .modal-icon {
+  fill: var(--accent-color);
+}
+
+.modal-form {
+  width: 448px;
+}
+
+.modal-title {
+  margin-bottom: 12px;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 1.15;
+  text-align: center;
+  letter-spacing: 0.03em;
+  color: var(--main-title-color);
+}
+
+.modal-field {
+  position: relative;
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.01em;
+}
+
+.modal-label {
+  display: block;
+  padding-bottom: 4px;
+}
+
+.modal-input {
+  padding: 12px 42px;
+  outline: none;
+  width: 100%;
+  height: 40px;
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  border-radius: 4px;
+  transition: border-color var(--animation-timing) var(--timing-function);
+}
+
+.modal-input:focus {
+  border-color: var(--accent-color);
+}
+
+.modal-icons {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50);
+  transition: fill var(--animation-timing) var(--timing-function);
+}
+
+.modal-input:focus + .modal-icons {
+  fill: var(--accent-color);
+}
+
+.modal-textarea {
+  outline: none;
+  padding: 12px 16px;
+  width: 100%;
+  height: 138px;
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+  transition: border-color var(--animation-timing) var(--timing-function);
+}
+
+.modal-textarea:focus {
+  border-color: var(--accent-color);
+}
+
+.modal-textarea::placeholder {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.14;
+  letter-spacing: 0.01em;
+  color: rgba(117, 117, 117, 0.5);
+}
+
+.modal-checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0 30px 0;
+  width: 100%;
+  height: 24px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.71;
+  letter-spacing: 0.03em;
+  color: var(--text-color);
+}
+
+.checkbox-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.checkbox-icon {
+  display: inline-block;
+  margin-right: 7px;
+  width: 16px;
+  height: 15px;
+  border: 2px solid var(--main-title-color);
+  border-radius: 4px;
+  transition: background-color var(--animation-timing) var(--timing-function),
+    background-image var(--animation-timing) var(--timing-function),
+    border-color var(--animation-timing) var(--timing-function);
+}
+
+.checkbox-input:checked + .checkbox-icon {
+  background-color: var(--accent-color);
+  background-image: url(../images/icon-check.svg);
+  background-size: contain;
+  background-origin: border-box;
+  border-color: var(--accent-color);
+}
+
+.checkbox-text {
+  margin-right: 7px;
+}
+
+.checkbox-link {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+.modal-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-send {
+  width: 200px;
+  height: 50px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1.87;
+  text-align: center;
+  letter-spacing: 0.06em;
+  color: var(--title-color);
+  background-color: var(--main-button-color-background);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  transition: background-color var(--animation-timing) var(--timing-function),
+    box-shadow var(--animation-timing) var(--timing-function);
+}
+
+.modal-send:active {
+  background-color: var(--button-active);
+  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
+    0px 2px 2px rgba(0, 0, 0, 0.12);
 }
 
 /*description*/
@@ -278,6 +528,11 @@ address {
   min-height: 120px;
   margin-bottom: 30px;
   background-color: #f5f4fa;
+}
+
+.description-icon {
+  width: 70px;
+  height: 70px;
 }
 
 .description-title {
@@ -421,6 +676,8 @@ address {
 }
 
 .social-icon {
+  width: 20px;
+  height: 20px;
   fill: #afb1b8;
   transition: fill var(--animation-timing) var(--timing-function);
 }
@@ -604,6 +861,7 @@ address {
 }
 
 .footer-right {
+  margin-right: 93px;
   min-width: 206px;
   min-height: 80px;
 }
@@ -687,56 +945,67 @@ address {
   background-color: var(--accent-color);
 }
 
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-  opacity: 1;
-  transition: opacity var(--animation-timing) var(--timing-function);
+.footer-form {
+  position: relative;
+  width: 570px;
+  height: 86px;
 }
 
-.backdrop.is-hidden {
-  opacity: 0;
-  pointer-events: none;
+.footer-form-title {
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--title-color);
 }
 
-.backdrop.is-hidden .modal {
-  transform: translate(-50%, -50%) scale(0);
-}
-
-.modal {
-  position: absolute;
-  min-width: 528px;
-  min-height: 581px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  background-color: #ffffff;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
-    0px 2px 1px rgba(0, 0, 0, 0.2);
+.footer-input {
+  padding: 15px;
+  width: 358px;
+  height: 50px;
+  background-color: var(--second-background-color);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
   border-radius: 4px;
-  transition: transform var(--animation-timing) var(--timing-function);
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0.03em;
+  color: var(--title-color);
 }
 
-.modal-button {
+.footer-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 30px;
-  height: 30px;
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  height: 50px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1.87;
+  letter-spacing: 0.06em;
+  color: var(--text-button-first-color);
+  background-color: var(--main-button-color-background);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  transition: background-color var(--animation-timing) var(--timing-function),
+    box-shadow var(--animation-timing) var(--timing-function);
 }
 
-.modal-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 18px;
-  height: 18px;
+.footer-button:active {
+  background-color: var(--button-active);
+  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
+    0px 2px 2px rgba(0, 0, 0, 0.12);
+}
+
+.footer-send {
+  margin-left: 10px;
+  width: 24px;
+  height: 24px;
+  fill: #ffffff;
 }
